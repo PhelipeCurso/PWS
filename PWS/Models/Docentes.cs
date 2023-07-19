@@ -6,14 +6,19 @@ namespace PWS.Models
     [Table("Docentes")]
     public class Docentes
     {
-            public int Id { get; set; }
+            [Key]
+            [Column("Id")]
+            [Required]
+            public int ID { get; set; }
 
             [Required]
+            [Column("Nome")]
             public string? Nome { get; set; }
-
+           
+            [Column("Idade")]
             public int Idade { get; set; }
 
-            [EmailAddress]
+            [Column("Email")]
             public string? Email { get; set; }
 
             [Column("cpf")]
@@ -51,6 +56,9 @@ namespace PWS.Models
 
             [Column("observacao")]
             public string? Observacao { get; set; }
-        
+          
+           [Column("Salario")]
+           public double Salario { get; set; }
+
     }
 }

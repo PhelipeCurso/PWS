@@ -35,7 +35,7 @@ namespace PWS.Controllers
             }
 
             var docentes = await _context.Docentes
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (docentes == null)
             {
                 return NotFound();
@@ -55,7 +55,7 @@ namespace PWS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Idade,Email,CPF,CNPJ,CEP,Endereco,Cidade,Bairro,Complemento,Telefone,Celular,Ativo,Data_do_Cadastro,Observacao")] Docentes docentes)
+        public async Task<IActionResult> Create([Bind("ID,Nome,Idade,Email,CPF,CNPJ,CEP,Endereco,Cidade,Bairro,Complemento,Telefone,Celular,Ativo,Data_do_Cadastro,Observacao,Salario")] Docentes docentes)
         {
             if (ModelState.IsValid)
             {
@@ -87,9 +87,9 @@ namespace PWS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Idade,Email,CPF,CNPJ,CEP,Endereco,Cidade,Bairro,Complemento,Telefone,Celular,Ativo,Data_do_Cadastro,Observacao")] Docentes docentes)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Nome,Idade,Email,CPF,CNPJ,CEP,Endereco,Cidade,Bairro,Complemento,Telefone,Celular,Ativo,Data_do_Cadastro,Observacao,Salario")] Docentes docentes)
         {
-            if (id != docentes.Id)
+            if (id != docentes.ID)
             {
                 return NotFound();
             }
@@ -103,7 +103,7 @@ namespace PWS.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!DocentesExists(docentes.Id))
+                    if (!DocentesExists(docentes.ID))
                     {
                         return NotFound();
                     }
@@ -126,7 +126,7 @@ namespace PWS.Controllers
             }
 
             var docentes = await _context.Docentes
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (docentes == null)
             {
                 return NotFound();
@@ -156,7 +156,7 @@ namespace PWS.Controllers
 
         private bool DocentesExists(int id)
         {
-          return (_context.Docentes?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Docentes?.Any(e => e.ID == id)).GetValueOrDefault();
         }
     }
 }

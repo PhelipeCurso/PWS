@@ -9,87 +9,87 @@ using PWS.Models;
 
 namespace PWS.Controllers
 {
-    public class AlunosController : Controller
+    public class InstituicaoController : Controller
     {
         private readonly Contexto _context;
 
-        public AlunosController(Contexto context)
+        public InstituicaoController(Contexto context)
         {
             _context = context;
         }
 
-        // GET: Alunos
+        // GET: Instituicao
         public async Task<IActionResult> Index()
         {
-              return _context.Alunos != null ? 
-                          View(await _context.Alunos.ToListAsync()) :
-                          Problem("Entity set 'Contexto.Alunos'  is null.");
+              return _context.Instituicao != null ? 
+                          View(await _context.Instituicao.ToListAsync()) :
+                          Problem("Entity set 'Contexto.Instituicao'  is null.");
         }
 
-        // GET: Alunos/Details/5
+        // GET: Instituicao/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Alunos == null)
+            if (id == null || _context.Instituicao == null)
             {
                 return NotFound();
             }
 
-            var alunos = await _context.Alunos
+            var instituicao = await _context.Instituicao
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (alunos == null)
+            if (instituicao == null)
             {
                 return NotFound();
             }
 
-            return View(alunos);
+            return View(instituicao);
         }
 
-        // GET: Alunos/Create
+        // GET: Instituicao/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Alunos/Create
+        // POST: Instituicao/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Idade,Matricula,Email,CPF,CNPJ,Responsavel,DocResp,CEP,Endereco,Cidade,Bairro,Complemento,Telefone,Celular,Ativo,Data_do_Cadastro,Observacao,StatusAluno")] Alunos alunos)
+        public async Task<IActionResult> Create([Bind("Id,NomeInstituicao,CNPJ,Responsavel,CEP,Endereco,Cidade,Bairro,Complemento,Telefone,Ativo,Data_do_Cadastro")] Instituicao instituicao)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(alunos);
+                _context.Add(instituicao);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(alunos);
+            return View(instituicao);
         }
 
-        // GET: Alunos/Edit/5
+        // GET: Instituicao/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Alunos == null)
+            if (id == null || _context.Instituicao == null)
             {
                 return NotFound();
             }
 
-            var alunos = await _context.Alunos.FindAsync(id);
-            if (alunos == null)
+            var instituicao = await _context.Instituicao.FindAsync(id);
+            if (instituicao == null)
             {
                 return NotFound();
             }
-            return View(alunos);
+            return View(instituicao);
         }
 
-        // POST: Alunos/Edit/5
+        // POST: Instituicao/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Idade,Matricula,Email,CPF,CNPJ,Responsavel,DocResp,CEP,Endereco,Cidade,Bairro,Complemento,Telefone,Celular,Ativo,Data_do_Cadastro,Observacao,StatusAluno")] Alunos alunos)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,NomeInstituicao,CNPJ,Responsavel,CEP,Endereco,Cidade,Bairro,Complemento,Telefone,Ativo,Data_do_Cadastro")] Instituicao instituicao)
         {
-            if (id != alunos.Id)
+            if (id != instituicao.Id)
             {
                 return NotFound();
             }
@@ -98,12 +98,12 @@ namespace PWS.Controllers
             {
                 try
                 {
-                    _context.Update(alunos);
+                    _context.Update(instituicao);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AlunosExists(alunos.Id))
+                    if (!InstituicaoExists(instituicao.Id))
                     {
                         return NotFound();
                     }
@@ -114,49 +114,49 @@ namespace PWS.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(alunos);
+            return View(instituicao);
         }
 
-        // GET: Alunos/Delete/5
+        // GET: Instituicao/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Alunos == null)
+            if (id == null || _context.Instituicao == null)
             {
                 return NotFound();
             }
 
-            var alunos = await _context.Alunos
+            var instituicao = await _context.Instituicao
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (alunos == null)
+            if (instituicao == null)
             {
                 return NotFound();
             }
 
-            return View(alunos);
+            return View(instituicao);
         }
 
-        // POST: Alunos/Delete/5
+        // POST: Instituicao/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Alunos == null)
+            if (_context.Instituicao == null)
             {
-                return Problem("Entity set 'Contexto.Alunos'  is null.");
+                return Problem("Entity set 'Contexto.Instituicao'  is null.");
             }
-            var alunos = await _context.Alunos.FindAsync(id);
-            if (alunos != null)
+            var instituicao = await _context.Instituicao.FindAsync(id);
+            if (instituicao != null)
             {
-                _context.Alunos.Remove(alunos);
+                _context.Instituicao.Remove(instituicao);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AlunosExists(int id)
+        private bool InstituicaoExists(int id)
         {
-          return (_context.Alunos?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Instituicao?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

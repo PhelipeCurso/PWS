@@ -12,8 +12,8 @@ using PWS.Models;
 namespace PWS.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20230714204802_Docentes-Atualizacao")]
-    partial class DocentesAtualizacao
+    [Migration("20230719183321_Criacao-Instituicao")]
+    partial class CriacaoInstituicao
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,7 +29,8 @@ namespace PWS.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("Id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
@@ -47,19 +48,16 @@ namespace PWS.Migrations
                         .HasColumnType("text")
                         .HasColumnName("cep");
 
-                    b.Property<string>("CNPJ")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("cnpj");
+                    b.Property<double>("CNPJ")
+                        .HasColumnType("double precision")
+                        .HasColumnName("CNPJ");
 
-                    b.Property<string>("CPF")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("cpf");
+                    b.Property<double>("CPF")
+                        .HasColumnType("double precision")
+                        .HasColumnName("CPF");
 
-                    b.Property<string>("Celular")
-                        .IsRequired()
-                        .HasColumnType("text")
+                    b.Property<double?>("Celular")
+                        .HasColumnType("double precision")
                         .HasColumnName("celular");
 
                     b.Property<string>("Cidade")
@@ -68,17 +66,22 @@ namespace PWS.Migrations
                         .HasColumnName("cidade");
 
                     b.Property<string>("Complemento")
-                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("complemento");
 
                     b.Property<DateTime>("Data_do_Cadastro")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("data_do_cadastro");
+
+                    b.Property<string>("DocResp")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("DocResponsavel");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("EmailAddress");
 
                     b.Property<string>("Endereco")
                         .IsRequired()
@@ -86,20 +89,33 @@ namespace PWS.Migrations
                         .HasColumnName("endereco");
 
                     b.Property<int>("Idade")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("Idade");
+
+                    b.Property<decimal>("Matricula")
+                        .HasColumnType("numeric(20,0)")
+                        .HasColumnName("Matricula");
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("Nome");
 
                     b.Property<string>("Observacao")
-                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("observacao");
 
-                    b.Property<string>("Telefone")
+                    b.Property<string>("Responsavel")
                         .IsRequired()
                         .HasColumnType("text")
+                        .HasColumnName("Responsavel");
+
+                    b.Property<int?>("StatusAluno")
+                        .HasColumnType("integer")
+                        .HasColumnName("StatusAluno");
+
+                    b.Property<double?>("Telefone")
+                        .HasColumnType("double precision")
                         .HasColumnName("telefone");
 
                     b.HasKey("Id");
@@ -109,11 +125,12 @@ namespace PWS.Migrations
 
             modelBuilder.Entity("PWS.Models.Docentes", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("Id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
 
                     b.Property<bool>("Ativo")
                         .HasColumnType("boolean")
@@ -148,34 +165,106 @@ namespace PWS.Migrations
                         .HasColumnName("complemento");
 
                     b.Property<DateTime>("Data_do_Cadastro")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("data_do_cadastro");
 
                     b.Property<string>("Email")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("Email");
 
                     b.Property<string>("Endereco")
                         .HasColumnType("text")
                         .HasColumnName("endereco");
 
                     b.Property<int>("Idade")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("Idade");
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("Nome");
 
                     b.Property<string>("Observacao")
                         .HasColumnType("text")
                         .HasColumnName("observacao");
 
+                    b.Property<double>("Salario")
+                        .HasColumnType("double precision")
+                        .HasColumnName("Salario");
+
                     b.Property<string>("Telefone")
                         .HasColumnType("text")
                         .HasColumnName("telefone");
 
-                    b.HasKey("Id");
+                    b.HasKey("ID");
 
                     b.ToTable("Docentes");
+                });
+
+            modelBuilder.Entity("PWS.Models.Instituicao", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("Id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<bool?>("Ativo")
+                        .HasColumnType("boolean")
+                        .HasColumnName("ativo");
+
+                    b.Property<string>("Bairro")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("Bairro");
+
+                    b.Property<string>("CEP")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("CEP");
+
+                    b.Property<string>("CNPJ")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("CNPJ");
+
+                    b.Property<string>("Cidade")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("Cidade");
+
+                    b.Property<string>("Complemento")
+                        .HasColumnType("text")
+                        .HasColumnName("Complemento");
+
+                    b.Property<DateTime>("Data_do_Cadastro")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("data_do_cadastro");
+
+                    b.Property<string>("Endereco")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("Endereco");
+
+                    b.Property<string>("NomeInstituicao")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("Nome");
+
+                    b.Property<string>("Responsavel")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("Responsavel");
+
+                    b.Property<double?>("Telefone")
+                        .HasColumnType("double precision")
+                        .HasColumnName("Telefone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Instituicao");
                 });
 #pragma warning restore 612, 618
         }

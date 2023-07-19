@@ -22,11 +22,15 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Alunos" asp-action="Index">Alunos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Docentes" asp-action="Index">Docentes</a>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown">Administrativo</button>
+                            <div class="dropdown-menu">
+                                <a class="nav-link text-primary" asp-area="" asp-controller="Alunos" asp-action="Index">Alunos</a>
+                                <a class="nav-link text-primary" asp-area="" asp-controller="Docentes" asp-action="Index">Docentes</a>
+                                <a class="nav-link text-primary" asp-area="" asp-controller="Instituicao" asp-action="Index">Instituicao</a>
+                                <a class="nav-link text-primary" asp-area="" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
+                                <a class="nav-link text-primary" asp-area="" asp-controller="Clientes" asp-action="Index">Cliente</a>
+                            </div>
                         </li>
                     </ul>
                 </div>
