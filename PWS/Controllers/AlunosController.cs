@@ -55,7 +55,7 @@ namespace PWS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Idade,Matricula,Email,CPF,CNPJ,Responsavel,DocResp,CEP,Endereco,Cidade,Bairro,Complemento,Telefone,Celular,Ativo,Data_do_Cadastro,Observacao,StatusAluno")] Alunos alunos)
+        public async Task<IActionResult> Create([Bind("Id,Nome,Idade,Matricula,DataMatricula,Email,CPF,CNPJ,Responsavel,DocResp,CEP,Endereco,Cidade,Bairro,Complemento,Telefone,Celular,Ativo,Data_do_Cadastro,Observacao,StatusAluno,NameInst")] Alunos alunos)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +87,7 @@ namespace PWS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Idade,Matricula,Email,CPF,CNPJ,Responsavel,DocResp,CEP,Endereco,Cidade,Bairro,Complemento,Telefone,Celular,Ativo,Data_do_Cadastro,Observacao,StatusAluno")] Alunos alunos)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Idade,Matricula,DataMatricula,Email,CPF,CNPJ,Responsavel,DocResp,CEP,Endereco,Cidade,Bairro,Complemento,Telefone,Celular,Ativo,Data_do_Cadastro,Observacao,StatusAluno,NameInst")] Alunos alunos)
         {
             if (id != alunos.Id)
             {

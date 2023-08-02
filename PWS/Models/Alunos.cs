@@ -1,6 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
+using System.Numerics;
 
 namespace PWS.Models
 {
@@ -24,9 +25,14 @@ namespace PWS.Models
         [Column("Idade")]
         public int Idade { get; set; }
 
+
         [Column("Matricula")]
         [Required]
         public ulong Matricula { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime DataMatricula { get; set; }
 
         [Column("EmailAddress")]
         public string Email { get; set; }
@@ -68,6 +74,8 @@ namespace PWS.Models
         public bool Ativo { get; set; }
 
         [Column("data_do_cadastro")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Data_do_Cadastro { get; set; }
 
         [Column("observacao")]
@@ -75,5 +83,10 @@ namespace PWS.Models
 
         [Column("StatusAluno")]
         public StatusAluno? StatusAluno { get; set; }
+
+        [Column("Instituição")]
+        [Display(Name = "Instituição")]
+        public string NameInst { get; set; }
+       
     }
 }

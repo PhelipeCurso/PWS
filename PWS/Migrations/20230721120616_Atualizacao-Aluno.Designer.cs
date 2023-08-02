@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PWS.Models;
@@ -11,9 +12,11 @@ using PWS.Models;
 namespace PWS.Migrations
 {
     [DbContext(typeof(Contexto))]
-    partial class ContextoModelSnapshot : ModelSnapshot
+    [Migration("20230721120616_Atualizacao-Aluno")]
+    partial class AtualizacaoAluno
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -96,11 +99,6 @@ namespace PWS.Migrations
                         .HasColumnType("numeric(20,0)")
                         .HasColumnName("Matricula");
 
-                    b.Property<string>("NameInst")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("Instituição");
-
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("text")
@@ -125,7 +123,7 @@ namespace PWS.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Alunos", (string)null);
+                    b.ToTable("Aluno");
                 });
 
             modelBuilder.Entity("PWS.Models.Docentes", b =>
@@ -204,7 +202,7 @@ namespace PWS.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Docentes", (string)null);
+                    b.ToTable("Docentes");
                 });
 
             modelBuilder.Entity("PWS.Models.Instituicao", b =>
@@ -269,7 +267,7 @@ namespace PWS.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Instituicao", (string)null);
+                    b.ToTable("Instituicao");
                 });
 #pragma warning restore 612, 618
         }

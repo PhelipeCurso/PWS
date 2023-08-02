@@ -7,7 +7,9 @@
 <h1>Alunos</h1>
 
 <p>
+<p>
     <a class="btn btn-outline-success " asp-action="Create">Novo Aluno</a>
+</p>
 </p>
 <table class="table">
     <thead>
@@ -19,8 +21,13 @@
             <th>
                 @Html.DisplayNameFor(model => model.Matricula)
             </th>
-          
-            
+            <th>
+                @Html.DisplayNameFor(model=> model.Ativo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NameInst)
+            </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -29,36 +36,44 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Nome)
             </td>
-            
+           
             <td>
                 @Html.DisplayFor(modelItem => item.Matricula)
             </td>
+           
             <td>
-                <a asp-action="Edit" class="btn btn-outline-success " asp-route-id="@item.Id">Alterar</a>
-                <a asp-action="Details" class="btn btn-outline-primary " asp-route-id="@item.Id">Detalhes</a>
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-outline-danger m-1" data-bs-toggle="modal" data-bs-target="#DeleteModal-@item.Id">
-                    <i = class="fa fa-trash"> Deletar </i>
-                </button>
+                @Html.DisplayFor(modelItem => item.Ativo)
+            </td>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.NameInst)
+            </td>
+                <td>
+                    <a asp-action="Edit" class="btn btn-outline-success " asp-route-id="@item.Id">Alterar</a>
+                    <a asp-action="Details" class="btn btn-outline-primary " asp-route-id="@item.Id">Detalhes</a>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-outline-danger m-1" data-bs-toggle="modal" data-bs-target="#DeleteModal-@item.Id">
+                        <i = class="fa fa-trash"> Deletar </i>
+                    </button>
 
-                <!-- Modal -->
-                <div class="modal fade" id="DeleteModal-@item.Id" tabindex="-1" aria-labelledby="DeleteModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="DeleteModalLabel">Excluir Cliente</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                Deseja realmente excluir o cliente @item.Nome?
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-secondary m-1" data-bs-dismiss="modal">Não</button>
-                                <a asp-action="Delete" class="btn btn-outline-danger m-1" asp-route-id="@item.Id">Sim</a>
+                    <!-- Modal -->
+                    <div class="modal fade" id="DeleteModal-@item.Id" tabindex="-1" aria-labelledby="DeleteModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="DeleteModalLabel">Excluir Cliente</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Deseja realmente excluir o cliente @item.Nome?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-secondary m-1" data-bs-dismiss="modal">Não</button>
+                                    <a asp-action="Delete" class="btn btn-outline-danger m-1" asp-route-id="@item.Id">Sim</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 </td>
         </tr>
 }

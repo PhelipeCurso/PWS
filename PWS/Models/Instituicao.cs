@@ -43,6 +43,8 @@ namespace PWS.Models
         public bool? Ativo { get; set; }
 
         [Column("data_do_cadastro")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Data_do_Cadastro { get; set; }
     }
 }

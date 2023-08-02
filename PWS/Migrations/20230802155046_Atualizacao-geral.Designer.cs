@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PWS.Models;
@@ -11,9 +12,11 @@ using PWS.Models;
 namespace PWS.Migrations
 {
     [DbContext(typeof(Contexto))]
-    partial class ContextoModelSnapshot : ModelSnapshot
+    [Migration("20230802155046_Atualizacao-geral")]
+    partial class Atualizacaogeral
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -216,6 +219,9 @@ namespace PWS.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("AlunosId")
+                        .HasColumnType("integer");
+
                     b.Property<bool?>("Ativo")
                         .HasColumnType("boolean")
                         .HasColumnName("ativo");
@@ -248,6 +254,9 @@ namespace PWS.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("data_do_cadastro");
 
+                    b.Property<int?>("DocentesID")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Endereco")
                         .IsRequired()
                         .HasColumnType("text")
@@ -269,7 +278,32 @@ namespace PWS.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AlunosId");
+
+                    b.HasIndex("DocentesID");
+
                     b.ToTable("Instituicao", (string)null);
+                });
+
+            modelBuilder.Entity("PWS.Models.Instituicao", b =>
+                {
+                    b.HasOne("PWS.Models.Alunos", null)
+                        .WithMany("Instituicao")
+                        .HasForeignKey("AlunosId");
+
+                    b.HasOne("PWS.Models.Docentes", null)
+                        .WithMany("Instituicao")
+                        .HasForeignKey("DocentesID");
+                });
+
+            modelBuilder.Entity("PWS.Models.Alunos", b =>
+                {
+                    b.Navigation("Instituicao");
+                });
+
+            modelBuilder.Entity("PWS.Models.Docentes", b =>
+                {
+                    b.Navigation("Instituicao");
                 });
 #pragma warning restore 612, 618
         }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PWS.Models;
@@ -11,9 +12,11 @@ using PWS.Models;
 namespace PWS.Migrations
 {
     [DbContext(typeof(Contexto))]
-    partial class ContextoModelSnapshot : ModelSnapshot
+    [Migration("20230721122424_Atualizacao-Aluno-Docentes-01")]
+    partial class AtualizacaoAlunoDocentes01
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -96,11 +99,6 @@ namespace PWS.Migrations
                         .HasColumnType("numeric(20,0)")
                         .HasColumnName("Matricula");
 
-                    b.Property<string>("NameInst")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("Instituição");
-
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("text")
@@ -125,7 +123,7 @@ namespace PWS.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Alunos", (string)null);
+                    b.ToTable("Aluno");
                 });
 
             modelBuilder.Entity("PWS.Models.Docentes", b =>
@@ -204,7 +202,7 @@ namespace PWS.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Docentes", (string)null);
+                    b.ToTable("Docentes");
                 });
 
             modelBuilder.Entity("PWS.Models.Instituicao", b =>
@@ -215,6 +213,9 @@ namespace PWS.Migrations
                         .HasColumnName("Id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("AlunosId")
+                        .HasColumnType("integer");
 
                     b.Property<bool?>("Ativo")
                         .HasColumnType("boolean")
@@ -248,6 +249,9 @@ namespace PWS.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("data_do_cadastro");
 
+                    b.Property<int?>("DocentesID")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Endereco")
                         .IsRequired()
                         .HasColumnType("text")
@@ -269,7 +273,32 @@ namespace PWS.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Instituicao", (string)null);
+                    b.HasIndex("AlunosId");
+
+                    b.HasIndex("DocentesID");
+
+                    b.ToTable("Instituicao");
+                });
+
+            modelBuilder.Entity("PWS.Models.Instituicao", b =>
+                {
+                    b.HasOne("PWS.Models.Alunos", null)
+                        .WithMany("Instituicao")
+                        .HasForeignKey("AlunosId");
+
+                    b.HasOne("PWS.Models.Docentes", null)
+                        .WithMany("Instituicao")
+                        .HasForeignKey("DocentesID");
+                });
+
+            modelBuilder.Entity("PWS.Models.Alunos", b =>
+                {
+                    b.Navigation("Instituicao");
+                });
+
+            modelBuilder.Entity("PWS.Models.Docentes", b =>
+                {
+                    b.Navigation("Instituicao");
                 });
 #pragma warning restore 612, 618
         }

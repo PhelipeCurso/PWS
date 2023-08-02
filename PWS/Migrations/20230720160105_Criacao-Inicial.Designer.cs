@@ -12,8 +12,8 @@ using PWS.Models;
 namespace PWS.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20230719183321_Criacao-Instituicao")]
-    partial class CriacaoInstituicao
+    [Migration("20230720160105_Criacao-Inicial")]
+    partial class CriacaoInicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
