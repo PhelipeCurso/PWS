@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PWS.Models;
@@ -11,9 +12,11 @@ using PWS.Models;
 namespace PWS.Migrations
 {
     [DbContext(typeof(Contexto))]
-    partial class ContextoModelSnapshot : ModelSnapshot
+    [Migration("20230802195029_Atualizacao-todos")]
+    partial class Atualizacaotodos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -270,47 +273,6 @@ namespace PWS.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Instituicao", (string)null);
-                });
-
-            modelBuilder.Entity("PWS.Models.Usuario", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("Id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ConfSenha")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("ConfSenha");
-
-                    b.Property<DateTime>("DataMatricula")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("EmailAddress");
-
-                    b.Property<string>("Login")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("Login");
-
-                    b.Property<int>("PerfilUser")
-                        .HasColumnType("integer")
-                        .HasColumnName("PerfilUser");
-
-                    b.Property<string>("Senha")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("Senha");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Usuario", (string)null);
                 });
 #pragma warning restore 612, 618
         }

@@ -34,7 +34,7 @@ namespace PWS.Migrations
                     telefone = table.Column<double>(type: "double precision", nullable: true),
                     celular = table.Column<double>(type: "double precision", nullable: true),
                     ativo = table.Column<bool>(type: "boolean", nullable: false),
-                    data_do_cadastro = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    data_do_cadastro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     observacao = table.Column<string>(type: "text", nullable: true),
                     StatusAluno = table.Column<int>(type: "integer", nullable: true)
                 },
@@ -62,13 +62,36 @@ namespace PWS.Migrations
                     telefone = table.Column<string>(type: "text", nullable: true),
                     celular = table.Column<string>(type: "text", nullable: true),
                     ativo = table.Column<bool>(type: "boolean", nullable: false),
-                    data_do_cadastro = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    data_do_cadastro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     observacao = table.Column<string>(type: "text", nullable: true),
                     Salario = table.Column<double>(type: "double precision", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Docentes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Instituicao",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Nome = table.Column<string>(type: "text", nullable: false),
+                    CNPJ = table.Column<string>(type: "text", nullable: false),
+                    Responsavel = table.Column<string>(type: "text", nullable: false),
+                    CEP = table.Column<string>(type: "text", nullable: false),
+                    Endereco = table.Column<string>(type: "text", nullable: false),
+                    Cidade = table.Column<string>(type: "text", nullable: false),
+                    Bairro = table.Column<string>(type: "text", nullable: false),
+                    Complemento = table.Column<string>(type: "text", nullable: true),
+                    Telefone = table.Column<double>(type: "double precision", nullable: true),
+                    ativo = table.Column<bool>(type: "boolean", nullable: true),
+                    data_do_cadastro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Instituicao", x => x.Id);
                 });
         }
 
@@ -80,6 +103,9 @@ namespace PWS.Migrations
 
             migrationBuilder.DropTable(
                 name: "Docentes");
+
+            migrationBuilder.DropTable(
+                name: "Instituicao");
         }
     }
 }

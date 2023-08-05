@@ -12,8 +12,8 @@ using PWS.Models;
 namespace PWS.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20230719183321_Criacao-Instituicao")]
-    partial class CriacaoInstituicao
+    [Migration("20230803155208_Criacao-Usuario")]
+    partial class CriacaoUsuario
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -69,6 +69,9 @@ namespace PWS.Migrations
                         .HasColumnType("text")
                         .HasColumnName("complemento");
 
+                    b.Property<DateTime>("DataMatricula")
+                        .HasColumnType("timestamp without time zone");
+
                     b.Property<DateTime>("Data_do_Cadastro")
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("data_do_cadastro");
@@ -96,6 +99,11 @@ namespace PWS.Migrations
                         .HasColumnType("numeric(20,0)")
                         .HasColumnName("Matricula");
 
+                    b.Property<string>("NameInst")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("Instituição");
+
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("text")
@@ -120,7 +128,7 @@ namespace PWS.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Aluno");
+                    b.ToTable("Alunos", (string)null);
                 });
 
             modelBuilder.Entity("PWS.Models.Docentes", b =>
@@ -199,7 +207,7 @@ namespace PWS.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Docentes");
+                    b.ToTable("Docentes", (string)null);
                 });
 
             modelBuilder.Entity("PWS.Models.Instituicao", b =>
@@ -264,7 +272,48 @@ namespace PWS.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Instituicao");
+                    b.ToTable("Instituicao", (string)null);
+                });
+
+            modelBuilder.Entity("PWS.Models.Usuario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("Id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ConfSenha")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("ConfSenha");
+
+                    b.Property<DateTime>("DataMatricula")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("EmailAddress");
+
+                    b.Property<string>("Login")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("Login");
+
+                    b.Property<int>("PerfilUser")
+                        .HasColumnType("integer")
+                        .HasColumnName("PerfilUser");
+
+                    b.Property<string>("Senha")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("Senha");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Usuario", (string)null);
                 });
 #pragma warning restore 612, 618
         }

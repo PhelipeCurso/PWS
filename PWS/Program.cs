@@ -12,7 +12,7 @@ namespace PWS
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddEntityFrameworkNpgsql().AddDbContext<Contexto>(options => options.UseNpgsql("Host=localhost;Port=5432;Pooling=true;Database=PWS;User Id=postgres;Password=masterkey"));
+            builder.Services.AddEntityFrameworkNpgsql().AddDbContext<Contexto>(options => options.UseNpgsql("Host=localhost;Port=5432;Pooling=true;Database=dboPWS;User Id=postgres;Password=masterkey"));
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
             var app = builder.Build();
             

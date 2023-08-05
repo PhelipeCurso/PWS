@@ -9,87 +9,87 @@ using PWS.Models;
 
 namespace PWS.Controllers
 {
-    public class AlunosController : Controller
+    public class UsuariosController : Controller
     {
         private readonly Contexto _context;
 
-        public AlunosController(Contexto context)
+        public UsuariosController(Contexto context)
         {
             _context = context;
         }
 
-        // GET: Alunos
+        // GET: Usuarios
         public async Task<IActionResult> Index()
         {
-              return _context.Alunos != null ? 
-                          View(await _context.Alunos.ToListAsync()) :
-                          Problem("Entity set 'Contexto.Alunos'  is null.");
+              return _context.Usuarios != null ? 
+                          View(await _context.Usuarios.ToListAsync()) :
+                          Problem("Entity set 'Contexto.Usuarios'  is null.");
         }
 
-        // GET: Alunos/Details/5
+        // GET: Usuarios/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Alunos == null)
+            if (id == null || _context.Usuarios == null)
             {
                 return NotFound();
             }
 
-            var alunos = await _context.Alunos
+            var usuario = await _context.Usuarios
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (alunos == null)
+            if (usuario == null)
             {
                 return NotFound();
             }
 
-            return View(alunos);
+            return View(usuario);
         }
 
-        // GET: Alunos/Create
+        // GET: Usuarios/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Alunos/Create
+        // POST: Usuarios/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Idade,Matricula,DataMatricula,Email,CPF,CNPJ,Responsavel,DocResp,CEP,Endereco,Cidade,Bairro,Complemento,Telefone,Celular,Ativo,Data_do_Cadastro,Observacao,StatusAluno,NameInst")] Alunos alunos)
+        public async Task<IActionResult> Create([Bind("Id,Login,Senha,ConfSenha,Email,PerfilUser,DataMatricula")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(alunos);
+                _context.Add(usuario);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(alunos);
+            return View(usuario);
         }
 
-        // GET: Alunos/Edit/5
+        // GET: Usuarios/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Alunos == null)
+            if (id == null || _context.Usuarios == null)
             {
                 return NotFound();
             }
 
-            var alunos = await _context.Alunos.FindAsync(id);
-            if (alunos == null)
+            var usuario = await _context.Usuarios.FindAsync(id);
+            if (usuario == null)
             {
                 return NotFound();
             }
-            return View(alunos);
+            return View(usuario);
         }
 
-        // POST: Alunos/Edit/5
+        // POST: Usuarios/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Idade,Matricula,DataMatricula,Email,CPF,CNPJ,Responsavel,DocResp,CEP,Endereco,Cidade,Bairro,Complemento,Telefone,Celular,Ativo,Data_do_Cadastro,Observacao,StatusAluno,NameInst")] Alunos alunos)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Login,Senha,ConfSenha,Email,PerfilUser,DataMatricula")] Usuario usuario)
         {
-            if (id != alunos.Id)
+            if (id != usuario.Id)
             {
                 return NotFound();
             }
@@ -98,12 +98,12 @@ namespace PWS.Controllers
             {
                 try
                 {
-                    _context.Update(alunos);
+                    _context.Update(usuario);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AlunosExists(alunos.Id))
+                    if (!UsuarioExists(usuario.Id))
                     {
                         return NotFound();
                     }
@@ -114,49 +114,49 @@ namespace PWS.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(alunos);
+            return View(usuario);
         }
 
-        // GET: Alunos/Delete/5
+        // GET: Usuarios/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Alunos == null)
+            if (id == null || _context.Usuarios == null)
             {
                 return NotFound();
             }
 
-            var alunos = await _context.Alunos
+            var usuario = await _context.Usuarios
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (alunos == null)
+            if (usuario == null)
             {
                 return NotFound();
             }
 
-            return View(alunos);
+            return View(usuario);
         }
 
-        // POST: Alunos/Delete/5
+        // POST: Usuarios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Alunos == null)
+            if (_context.Usuarios == null)
             {
-                return Problem("Entity set 'Contexto.Alunos'  is null.");
+                return Problem("Entity set 'Contexto.Usuarios'  is null.");
             }
-            var alunos = await _context.Alunos.FindAsync(id);
-            if (alunos != null)
+            var usuario = await _context.Usuarios.FindAsync(id);
+            if (usuario != null)
             {
-                _context.Alunos.Remove(alunos);
+                _context.Usuarios.Remove(usuario);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AlunosExists(int id)
+        private bool UsuarioExists(int id)
         {
-          return (_context.Alunos?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Usuarios?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

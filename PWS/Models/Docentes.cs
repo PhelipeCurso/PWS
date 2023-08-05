@@ -51,14 +51,17 @@ namespace PWS.Models
             [Column("ativo")]
             public bool Ativo { get; set; }
 
-            [Column("data_do_cadastro")]
+           [Column("data_do_cadastro")]
+           [DataType(DataType.Date)]
+           [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
             public DateTime Data_do_Cadastro { get; set; }
 
-            [Column("observacao")]
+        [Column("observacao")]
             public string? Observacao { get; set; }
           
            [Column("Salario")]
            public double Salario { get; set; }
 
+         
     }
 }

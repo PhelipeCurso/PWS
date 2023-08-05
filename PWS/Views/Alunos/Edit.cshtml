@@ -29,6 +29,11 @@
                 <span asp-validation-for="Matricula" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="DataMatricula" class="control-label"></label>
+                <input asp-for="DataMatricula" class="form-control" />
+                <span asp-validation-for="DataMatricula" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
@@ -107,6 +112,11 @@
                 <label asp-for="StatusAluno" class="control-label"></label>
                 <input asp-for="StatusAluno" class="form-control" />
                 <span asp-validation-for="StatusAluno" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NameInst" class="control-label"></label>
+                <input asp-for="NameInst" class="form-control" />
+                <span asp-validation-for="NameInst" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
