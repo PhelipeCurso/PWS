@@ -12,6 +12,8 @@ namespace PWS.Models
         public DbSet<Alunos> Alunos { get; set; }
         public DbSet<Docentes> Docentes { get; set; }
         public DbSet<Instituicao> Instituicao { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -19,6 +21,7 @@ namespace PWS.Models
             modelBuilder.Entity<Alunos>().ToTable("Alunos");
             modelBuilder.Entity<Docentes>().ToTable("Docentes");
             modelBuilder.Entity<Instituicao>().ToTable("Instituicao");
+            modelBuilder.Entity<Usuario>().ToTable("Usuario");
         }
     }
 }
